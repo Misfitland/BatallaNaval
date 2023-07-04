@@ -48,22 +48,22 @@ public class Controlador extends JFrame {
         getContentPane().setLayout(new BorderLayout(0,0));
 
         JPanel panelPrincipal = new JPanel();
-        panelPrincipal.setBackground(Color.CYAN);
+        panelPrincipal.setBackground(Color.WHITE);
         getContentPane().add(panelPrincipal,BorderLayout.CENTER);
         panelPrincipal.setLayout(new BorderLayout(0,0));
 
         JPanel panelSup = new JPanel();
-        panelSup.setBackground(Color.CYAN);
+        panelSup.setBackground(Color.WHITE);
         panelPrincipal.add(panelSup,BorderLayout.NORTH);
         panelSup.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
 
         JPanel panelInferior = new JPanel();
-        panelInferior.setBackground(Color.CYAN);
+        panelInferior.setBackground(Color.WHITE);
         panelPrincipal.add(panelInferior,BorderLayout.SOUTH);
         panelInferior.setLayout(new FlowLayout(FlowLayout.CENTER,200,0));
 
         JPanel panelCentral = new JPanel();
-        panelCentral.setBackground(Color.cyan);
+        panelCentral.setBackground(Color.WHITE);
         panelPrincipal.add(panelCentral,BorderLayout.CENTER);
         panelCentral.setLayout(new GridBagLayout());
         panelTableroOponente = new PanelTableroOponente();
@@ -72,7 +72,7 @@ public class Controlador extends JFrame {
 
         // Set up JComponents
         // Titulo
-        titulo = new Header("MOVIMIENTOS ENEMIGO", Color.CYAN);
+        titulo = new Header("MOVIMIENTOS ENEMIGO", Color.WHITE);
         panelSup.add(titulo,FlowLayout.LEFT);
 
         // Icono

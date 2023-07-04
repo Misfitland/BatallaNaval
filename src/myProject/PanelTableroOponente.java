@@ -21,7 +21,7 @@ public class PanelTableroOponente extends JPanel {
     public PanelTableroOponente(){
         GridBagLayout gb = new GridBagLayout();
         this.setLayout(gb);
-        this.setBackground(Color.CYAN);
+        this.setBackground(Color.WHITE);
         tableroPosicionOponente = new Tableros();
         tableroPrincipalOponente = new Tableros();
         abecedario = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
@@ -61,7 +61,7 @@ public class PanelTableroOponente extends JPanel {
         private Image img;
 
         public BackgroundPane(){
-            img = new ImageIcon(getClass().getResource("/recursos/mar.jpg")).getImage();
+
             this.setLayout(new GridLayout(11, 11));
             this.setPreferredSize(new Dimension(400, 400));
             this.setBorder(BorderFactory.createLineBorder(Color.WHITE));

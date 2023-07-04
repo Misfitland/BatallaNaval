@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class PintarFlota {
     private PanelTablero panelTablero;
     private PanelFlota panelFlota;
-    private int barcoUsado; // Acumulador para identificar cuál nave ha sido desplegada (en orden del 1 al 10)
+    private int barcoUsado; // Acumulador para identificar cuál nave ha sido desplegada
     private ArrayList<Integer> casillasUsadasBarco; // casillas usadas por cada nave
 
     /**

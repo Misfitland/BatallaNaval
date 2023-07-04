@@ -37,7 +37,7 @@ public class PanelFlota extends JPanel{
     public PanelFlota(){
         GridBagLayout gbl = new GridBagLayout();
         this.setLayout(gbl);
-        this.setBackground(Color.CYAN);
+        this.setBackground(Color.WHITE);
         this.setPreferredSize(new Dimension(600,100));
         barcos();
     }
@@ -68,7 +68,7 @@ public class PanelFlota extends JPanel{
         portavion = new JButton();
         portavion.setText("PORTAVION");
         portavion.setIcon(imagePortavion);
-        portavion.setBackground(Color.CYAN);
+        portavion.setBackground(Color.WHITE);
         portavion.setHorizontalTextPosition( SwingConstants.CENTER );
         portavion.setVerticalTextPosition( SwingConstants.BOTTOM );
         portavion.setFocusable(false);
@@ -77,7 +77,7 @@ public class PanelFlota extends JPanel{
         destuctor = new JButton();
         destuctor.setText("DESTRUCTOR");
         destuctor.setIcon(imageDestructor);
-        destuctor.setBackground(Color.CYAN);
+        destuctor.setBackground(Color.WHITE);
         destuctor.setHorizontalTextPosition( SwingConstants.CENTER );
         destuctor.setVerticalTextPosition( SwingConstants.BOTTOM );
         destuctor.setFocusable(false);
@@ -86,7 +86,7 @@ public class PanelFlota extends JPanel{
         fragata = new JButton();
         fragata.setText("FRAGATA");
         fragata.setIcon(imageFragata);
-        fragata.setBackground(Color.CYAN);
+        fragata.setBackground(Color.WHITE);
         fragata.setHorizontalTextPosition( SwingConstants.CENTER );
         fragata.setVerticalTextPosition( SwingConstants.BOTTOM );
         fragata.setFocusable(false);
@@ -95,7 +95,7 @@ public class PanelFlota extends JPanel{
         submarino = new JButton();
         submarino.setText("SUBMARINO");
         submarino.setIcon(imageSubmarino);
-        submarino.setBackground(Color.CYAN);
+        submarino.setBackground(Color.WHITE);
         submarino.setHorizontalTextPosition( SwingConstants.CENTER );
         submarino.setVerticalTextPosition( SwingConstants.BOTTOM );
         submarino.setFocusable(false);
@@ -161,7 +161,7 @@ public class PanelFlota extends JPanel{
         panelFlota = new JPanel();
         panelFlota.setLayout(new GridLayout(2,2,10,10));
         panelFlota.setPreferredSize(new Dimension(350,300));
-        panelFlota.setBackground(Color.CYAN);
+        panelFlota.setBackground(Color.WHITE);
         tituloFlota = BorderFactory.createTitledBorder(blackline, "Tus barcos");
         tituloFlota.setTitleJustification(TitledBorder.CENTER);
         panelFlota.setBorder(tituloFlota);
@@ -181,7 +181,7 @@ public class PanelFlota extends JPanel{
 
         informacionJuego = new JTextPane();
         informacionJuego.setEditable(false);
-        informacionJuego.setBackground(Color.cyan);
+        informacionJuego.setBackground(Color.WHITE);
         StyledDocument documentStyle = informacionJuego.getStyledDocument();
         SimpleAttributeSet centerAttribute = new SimpleAttributeSet();
         StyleConstants.setAlignment(centerAttribute, StyleConstants.ALIGN_CENTER);
@@ -189,7 +189,7 @@ public class PanelFlota extends JPanel{
 
         infojuego = new JPanel(new GridLayout(2,0,0,0));
         infojuego.setPreferredSize(new Dimension(350,100));
-        infojuego.setBackground(Color.cyan);
+        infojuego.setBackground(Color.WHITE);
         tituloInfo = BorderFactory.createTitledBorder(blackline, "Información del juego");
         tituloInfo.setTitleJustification(TitledBorder.CENTER);
         infojuego.setBorder(tituloInfo);
@@ -204,7 +204,7 @@ public class PanelFlota extends JPanel{
         // Panel botones dentro de panel flota
         panelBotones = new JPanel();
         panelBotones.setLayout(new GridLayout(0,2,5,10));
-        panelBotones.setBackground(Color.CYAN);
+        panelBotones.setBackground(Color.WHITE);
         panelBotones.setPreferredSize(new Dimension(350,120));
         titulo_Orientacion = BorderFactory.createTitledBorder(blackline, "¿Como quieres acomodar tu flota?");
         titulo_Orientacion.setTitleJustification(TitledBorder.CENTER);
@@ -218,7 +218,7 @@ public class PanelFlota extends JPanel{
         // panel dentro de panel botones para los botones de horizontal y vertical
         subpanelBotones = new JPanel(new GridLayout());
         subpanelBotones.setPreferredSize(new Dimension(175,120));
-        subpanelBotones.setBackground(Color.cyan);
+        subpanelBotones.setBackground(Color.WHITE);
         subpanelBotones.setLayout(new GridLayout(2,0,5,5));
         subpanelBotones.add(vertical);
         subpanelBotones.add(horizontal);
@@ -227,7 +227,7 @@ public class PanelFlota extends JPanel{
         // panel dentro de panel botones para los botones de sup_inf, inf_sup, der_izq, izq_der
         subpanelBotones2 = new JPanel();
         subpanelBotones2.setPreferredSize(new Dimension(175,120));
-        subpanelBotones2.setBackground(Color.cyan);
+        subpanelBotones2.setBackground(Color.WHITE);
         subpanelBotones2.setLayout(new GridLayout(4,0,5,5));
         subpanelBotones2.add(sup_inf);
         subpanelBotones2.add(inf_sup);
