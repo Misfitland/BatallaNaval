@@ -10,20 +10,20 @@ import java.util.Random;
  * @autor
  * @version
  */
-public class Controlador extends JFrame {
-    private Header titulo;
-    private PanelTableroOponente tableroOponente;
-    private PintarFlotaOponente pintarFlotaOponente;
-    private Vista guiPrincipal;
-    private int contadorHundidos;
-    private int estado; // 1 si continua, 2 si gana el oponente, de lo contrario 0
+public class Controller extends JFrame {
+    private Header header;
+    private OpponentBoardPanel opponentBoard;
+    private PaintFleetOpponent paintFleetOpponent;
+    private View _view;
+    private int sunk;
+    private int state; // 1 si continua, 2 si gana el oponente, de lo contrario 0
 
     /**
      * Constructor de la clase GUI_Secundaria
      */
-    public Controlador(Vista _guiPrincipal) {
-        this.guiPrincipal = _guiPrincipal;
-        contadorHundidos = 0;
+    public Controller(View _guiPrincipal) {
+        this._view = _guiPrincipal;
+        sunk = 0;
         initGUI_Secundaria();
 
         // Configuración del JFrame
@@ -62,14 +62,14 @@ public class Controlador extends JFrame {
         panelCentral.setBackground(Color.WHITE);
         panelPrincipal.add(panelCentral,BorderLayout.CENTER);
         panelCentral.setLayout(new GridBagLayout());
-        tableroOponente = new PanelTableroOponente();
-        pintarFlotaOponente = new PintarFlotaOponente(tableroOponente);
-        panelCentral.add(tableroOponente);
+        opponentBoard = new OpponentBoardPanel();
+        paintFleetOpponent = new PaintFleetOpponent(opponentBoard);
+        panelCentral.add(opponentBoard);
 
         // Set up JComponents
         // Titulo
-        titulo = new Header("MOVIMIENTOS ENEMIGO", Color.WHITE);
-        panelSup.add(titulo,FlowLayout.LEFT);
+        header = new Header("MOVIMIENTOS ENEMIGO", Color.WHITE);
+        panelSup.add(header,FlowLayout.LEFT);
 
     }
 
@@ -84,23 +84,23 @@ public class Controlador extends JFrame {
         int col = columna.nextInt(10)+1;
 
         // Verifica si la casilla seleccionada hay un barco del usuario
-        if(tableroOponente.getTableroOponente("principal").getCasillasOcupadas().get(tableroOponente.getTableroOponente("principal").getMatriz()[row][col]) == Integer.valueOf(1)){
+        if(opponentBoard.getTableroOponente("principal").getCasillasOcupadas().get(opponentBoard.getTableroOponente("principal").getMatriz()[row][col]) == Integer.valueOf(1)){
             // Verifica si todas las casillas del barco fueron seleccionadas
-            if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col]) != Integer.valueOf(0)){
+            if(_view.getPanelTablero().getTablero("posicion").getCasillaBarco().get(_view.getPanelTablero().getTablero("posicion").getMatriz()[row][col]) != Integer.valueOf(0)){
                 for(int num=1; num < 11; num++){
-                    if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col]).equals("portavion" + String.valueOf(num))){
+                    if(_view.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(_view.getPanelTablero().getTablero("posicion").getMatriz()[row][col]).equals("portavion" + String.valueOf(num))){
                         funcionesCombate(row, col, "portavion" + String.valueOf(num));
                         break;
                     }else{
-                        if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col]).equals("submarino" + String.valueOf(num))){
+                        if(_view.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(_view.getPanelTablero().getTablero("posicion").getMatriz()[row][col]).equals("submarino" + String.valueOf(num))){
                             funcionesCombate(row, col, "submarino" + String.valueOf(num));
                             break;
                         }else{
-                            if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col]).equals("destructor" + String.valueOf(num))){
+                            if(_view.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(_view.getPanelTablero().getTablero("posicion").getMatriz()[row][col]).equals("destructor" + String.valueOf(num))){
                                 funcionesCombate(row, col, "destructor" + String.valueOf(num));
                                 break;
                             }else{
-                                if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col]).equals("fragata" + String.valueOf(num))){
+                                if(_view.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(_view.getPanelTablero().getTablero("posicion").getMatriz()[row][col]).equals("fragata" + String.valueOf(num))){
                                     funcionesCombate(row, col, "fragata" + String.valueOf(num));
                                     break;
                                 }
@@ -110,13 +110,13 @@ public class Controlador extends JFrame {
                 }
             }
         }else{
-            if(tableroOponente.getTableroOponente("principal").getCasillasOcupadas().get(tableroOponente.getTableroOponente("principal").getMatriz()[row][col]) == Integer.valueOf(2)){
+            if(opponentBoard.getTableroOponente("principal").getCasillasOcupadas().get(opponentBoard.getTableroOponente("principal").getMatriz()[row][col]) == Integer.valueOf(2)){
                 oponenteVsUsuario();
             }else{
-                tableroOponente.getTableroOponente("principal").getCasillasOcupadas().put(tableroOponente.getTableroOponente("principal").getMatriz()[row][col], Integer.valueOf(2));
-                guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
-                tableroOponente.getTableroOponente("principal").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
-                estado = 0;
+                opponentBoard.getTableroOponente("principal").getCasillasOcupadas().put(opponentBoard.getTableroOponente("principal").getMatriz()[row][col], Integer.valueOf(2));
+                _view.getPanelTablero().getTablero("posicion").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
+                opponentBoard.getTableroOponente("principal").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
+                state = 0;
             }
         }
     }
@@ -126,21 +126,21 @@ public class Controlador extends JFrame {
      */
     public void funcionesCombate(int row, int col, String barco){
         // Establece una imagen a la casilla seleccionada del tablero posición del usuario si un barco fue tocado
-        guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/tocado.png")));
-        tableroOponente.getTableroOponente("principal").getCasillasOcupadas().replace(tableroOponente.getTableroOponente("principal").getMatriz()[row][col], Integer.valueOf(2));
+        _view.getPanelTablero().getTablero("posicion").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/tocado.png")));
+        opponentBoard.getTableroOponente("principal").getCasillasOcupadas().replace(opponentBoard.getTableroOponente("principal").getMatriz()[row][col], Integer.valueOf(2));
 
         // Reduce las casillas ocupadas del barco tocado para poder ser hundido
-        guiPrincipal.getPanelTablero().getTablero("posicion").reducirCasillasUsadas(barco);
+        _view.getPanelTablero().getTablero("posicion").reducirCasillasUsadas(barco);
 
         // Si no hay más casillas ocupadas, el barco se hunde y se establecen las imágenes respectivas
-        if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col]) == Integer.valueOf(0)){
-            contadorHundidos++;
-            estado = 1;
+        if(_view.getPanelTablero().getTablero("posicion").getCasillaBarco().get(_view.getPanelTablero().getTablero("posicion").getMatriz()[row][col]) == Integer.valueOf(0)){
+            sunk++;
+            state = 1;
             for (int fil = 1; fil < 11; fil++) {
                 for (int colu = 1; colu < 11; colu++) {
-                    if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[fil][colu]) != null){
-                        if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[fil][colu]).equals(barco)){
-                            guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[fil][colu].setIcon(new ImageIcon(getClass().getResource("/recursos/hundido.png")));
+                    if(_view.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(_view.getPanelTablero().getTablero("posicion").getMatriz()[fil][colu]) != null){
+                        if(_view.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(_view.getPanelTablero().getTablero("posicion").getMatriz()[fil][colu]).equals(barco)){
+                            _view.getPanelTablero().getTablero("posicion").getMatriz()[fil][colu].setIcon(new ImageIcon(getClass().getResource("/recursos/hundido.png")));
                         }
                     }else{
                         continue;
@@ -148,11 +148,11 @@ public class Controlador extends JFrame {
                 }
             }
         }else{
-            estado = 1;
+            state = 1;
         }
 
-        if(contadorHundidos == 10){
-            estado = 2;
+        if(sunk == 10){
+            state = 2;
         }
     }
 
@@ -195,32 +195,32 @@ public class Controlador extends JFrame {
         Random filaAleatoria = new Random();
         int numFilaAleatoria = filaAleatoria.nextInt(10)+1;
 
-        if(numBarcoAleatorio == 1 &&  pintarFlotaOponente.getCantidadBarco("portavion") > 0){
-            if(!pintarFlotaOponente.funcionesFlota(nombreBarco, numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
+        if(numBarcoAleatorio == 1 &&  paintFleetOpponent.getCantidadBarco("portavion") > 0){
+            if(!paintFleetOpponent.funcionesFlota(nombreBarco, numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
                 distribucionFlotaOponente();
             }else{
-                pintarFlotaOponente.setCantidadBarco("portavion");
+                paintFleetOpponent.setCantidadBarco("portavion");
             }
         }else{
-            if(numBarcoAleatorio == 2 &&  pintarFlotaOponente.getCantidadBarco("submarino") > 0){
-                if(!pintarFlotaOponente.funcionesFlota(nombreBarco,numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
+            if(numBarcoAleatorio == 2 &&  paintFleetOpponent.getCantidadBarco("submarino") > 0){
+                if(!paintFleetOpponent.funcionesFlota(nombreBarco,numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
                     distribucionFlotaOponente();
                 }else{
-                    pintarFlotaOponente.setCantidadBarco("submarino");
+                    paintFleetOpponent.setCantidadBarco("submarino");
                 }
             }else{
-                if(numBarcoAleatorio == 3 &&  pintarFlotaOponente.getCantidadBarco("destructor") > 0){
-                    if(!pintarFlotaOponente.funcionesFlota(nombreBarco,numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
+                if(numBarcoAleatorio == 3 &&  paintFleetOpponent.getCantidadBarco("destructor") > 0){
+                    if(!paintFleetOpponent.funcionesFlota(nombreBarco,numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
                         distribucionFlotaOponente();
                     }else{
-                        pintarFlotaOponente.setCantidadBarco("destructor");
+                        paintFleetOpponent.setCantidadBarco("destructor");
                     }
                 }else{
-                    if(numBarcoAleatorio == 4 &&  pintarFlotaOponente.getCantidadBarco("fragata") > 0){
-                        if(!pintarFlotaOponente.funcionesFlota(nombreBarco,numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
+                    if(numBarcoAleatorio == 4 &&  paintFleetOpponent.getCantidadBarco("fragata") > 0){
+                        if(!paintFleetOpponent.funcionesFlota(nombreBarco,numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
                             distribucionFlotaOponente();
                         }else{
-                            pintarFlotaOponente.setCantidadBarco("fragata");
+                            paintFleetOpponent.setCantidadBarco("fragata");
                         }
                     }
                 }
@@ -231,21 +231,21 @@ public class Controlador extends JFrame {
     /**
      * Retorna el panelTableroOponente
      */
-    public PanelTableroOponente getTableroOponente(){
-        return tableroOponente;
+    public OpponentBoardPanel getTableroOponente(){
+        return opponentBoard;
     }
 
     /**
      * Retorna el objeto para pintar la flota oponente
      */
-    public PintarFlotaOponente getPintarFlotaOponente(){
-        return pintarFlotaOponente;
+    public PaintFleetOpponent getPintarFlotaOponente(){
+        return paintFleetOpponent;
     }
 
     /**
-     * Retorna la variable estado
+     * Retorna la variable state
      */
     public int getEstado(){
-        return estado;
+        return state;
     }
 }
