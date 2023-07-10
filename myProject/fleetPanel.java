@@ -59,9 +59,9 @@ public class fleetPanel extends JPanel{
 
         // Imágenes
         destroyerImage = new ImageIcon(getClass().getResource(PATH + "destructor.png"));
-        aircraftCarrierImage = new  ImageIcon(getClass().getResource(PATH+"aircraftCarrier.png"));
-        frigateImage = new ImageIcon(getClass().getResource(PATH+"frigate.png"));
-        submarineImage = new ImageIcon(getClass().getResource(PATH+"submarine.png"));
+        aircraftCarrierImage = new  ImageIcon(getClass().getResource(PATH+"portavion.png"));
+        frigateImage = new ImageIcon(getClass().getResource(PATH+"fragata.png"));
+        submarineImage = new ImageIcon(getClass().getResource(PATH+"submarino.png"));
 
         // Botones de aviones
         aircraftCarrier = new JButton();
@@ -240,16 +240,16 @@ public class fleetPanel extends JPanel{
      */
     public JButton getBotonBarco(String barco){
         JButton boton = new JButton();
-        if(barco.equals("aircraftCarrier")){
+        if(barco.equals("portavion")){
             boton = aircraftCarrier;
         }else{
-            if(barco.equals("submarine")){
+            if(barco.equals("submarino")){
                 boton = submarine;
             }else{
                 if(barco.equals("destructor")){
                     boton = destroyer;
                 }else{
-                    if(barco.equals("frigate")){
+                    if(barco.equals("fragata")){
                         boton = frigate;
                     }
                 }
